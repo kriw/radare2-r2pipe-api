@@ -90,4 +90,5 @@ pub trait R2Api {
     fn insts<T: AsRef<str>>(&mut self, Option<u64>, Option<T>) -> Result<Vec<LOpInfo>, Error>;
     fn disassemble_n_bytes(&mut self, n: u64, offset: Option<u64>) -> Result<Vec<LOpInfo>, Error>;
     fn disassemble_n_insts(&mut self, n: u64, offset: Option<u64>) -> Result<Vec<LOpInfo>, Error>;
+    fn disassemble_function(&mut self, name: &str) -> Result<Vec<LOpInfo>, Error>;
 }

@@ -36,9 +36,18 @@ impl R2Api for R2 {
         from_str(&self.recv())
     }
 
+    fn disassemble_function(&mut self, name: &str) -> Result<Vec<LOpInfo>, Error> {
+        self.send(&format!("pdfj {}", name));
+        from_str(&self.recv())
+    }
+
     // get 'n' (or 16) instructions at 'offset' (or current position if offset in
     // `None`)
-    fn insts<T: AsRef<str>>(&mut self, n: Option<u64>, offset: Option<T>) -> Result<Vec<LOpInfo>, Error> {
+    fn insts<T: AsRef<str>>(
+        &mut self,
+        n: Option<u64>,
+        offset: Option<T>,
+    ) -> Result<Vec<LOpInfo>, Error> {
         let n = n.unwrap_or(16);
         let mut cmd = format!("pdj{}", n);
         if let Some(o) = offset {
