@@ -111,6 +111,7 @@ impl R2Api for R2 {
     }
 
     fn strings(&mut self, data_only: bool) -> Result<Vec<LStringInfo>, Error> {
+        let _ = self.raw("e bin.minstr=1".to_string());
         if data_only {
             self.send("izj");
             from_str(&self.recv())
